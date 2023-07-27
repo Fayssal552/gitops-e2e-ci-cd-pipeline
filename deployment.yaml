@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: e2e-ci-cd-deployoment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: e2e-ci-cd-app
+  template:
+    metadata:
+      labels:
+        app: e2e-ci-cd-app
+    spec:
+      containers:
+        - name: e2e-ci-cd-app
+          image: fayssal9/e2e-ci-cd-pipeline:1.0.0-32
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 8080
